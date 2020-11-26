@@ -6,7 +6,7 @@ services:
         environment: 
             - NEW_SECRET_KEY=c$$k*m8c#zoy^mft^ef6o8g+93i!1)(*x-rz)z86iduyty8r0%z
             - DEBUG=1
-            volumes:
+        volumes:
             - .:/code
         ports:
             - 8000:8000
