@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'allauth.account',
 
     # Local
+    'books.apps.BooksConfig',
     'users.apps.UsersConfig', # new
     'pages.apps.PagesConfig', # new
+    
 ]
 
 
