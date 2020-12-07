@@ -162,6 +162,8 @@ STATICFILES_FINDERS = [
 "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Mmedia')
 
 # bookstore_project/settings.py
 LOGIN_REDIRECT_URL = 'home'
