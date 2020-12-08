@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
 SECRET_KEY = os.environ.get('NEW_SECRET_KEY')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth', 
     'allauth.account',
+    'debug_toolbar',
 
     # Local
     'books.apps.BooksConfig',
@@ -73,6 +77,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
 
 AUTH_USER_MODEL = 'users.CustomUser' # new
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -80,7 +85,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
