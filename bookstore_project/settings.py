@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'books.apps.BooksConfig',
     'users.apps.UsersConfig', # new
     'pages.apps.PagesConfig', # new
+    'orders.apps.OrdersConfig',
     
 ]
 
@@ -168,3 +169,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Mmedia')
 # bookstore_project/settings.py
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT = 'home' # new
+
+# Stripe
+STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')
