@@ -16,8 +16,7 @@ hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
 import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES = { 'default': db_from_env }
+DATABASES['default'] = dj_database_url.config(conn_max_age=500, ssl_require=True)
 
 SECRET_KEY = os.environ.get('NEW_SECRET_KEY')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
