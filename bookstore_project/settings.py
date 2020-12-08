@@ -15,10 +15,9 @@ import socket
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
-# Heroku
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES.update(db_from_env)
+DATABASES = { 'default': db_from_env }
 
 SECRET_KEY = os.environ.get('NEW_SECRET_KEY')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
