@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import socket
+import dj_database_url
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
-import dj_database_url
+
 
 SECRET_KEY = os.environ.get('NEW_SECRET_KEY')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -131,7 +132,7 @@ DATABASES = {
         'PORT': 5432
     }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
