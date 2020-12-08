@@ -29,7 +29,7 @@ SECRET_KEY = 'c$k*m8c#zoy^mft^ef6o8g+93i!1)(*x-rz)z86iduyty8r0%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -184,3 +184,16 @@ ACCOUNT_LOGOUT_REDIRECT = 'home' # new
 # Stripe
 STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
 STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')
+
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
+# production
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
